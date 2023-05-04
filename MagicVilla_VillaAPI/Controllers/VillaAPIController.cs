@@ -17,7 +17,7 @@ namespace MagicVilla_VillaAPI.Controllers
             return Ok(VillaStore.villaList);
         }
 
-        [HttpGet("id:int")]
+        [HttpGet("id:int", Name ="GetVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -39,7 +39,7 @@ namespace MagicVilla_VillaAPI.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<VillaDTO> CreateVilla([FromBody]VillaDTO villaDTO)
@@ -55,7 +55,7 @@ namespace MagicVilla_VillaAPI.Controllers
             villaDTO.Id = VillaStore.villaList.OrderByDescending(u => u.Id).FirstOrDefault().Id + 1;
             VillaStore.villaList.Add(villaDTO);
 
-            return Ok(villaDTO);
+            return CreatedAtRoute("GetVilla", new { id = villaDTO.Id} ,villaDTO);
         }
     }
 }
@@ -68,4 +68,6 @@ namespace MagicVilla_VillaAPI.Controllers
  * If you are creating a REST API, make your Controller class derive from ControllerBase and not Controller class. Controller derives from ControllerBase and adds support for MVC views. .
  * 
  * If you do not define HTTP verb, it defaults to "HTTPGET"
+ * 
+ * CreatedAtRoute: The CreatedAtRoute method is intended to return a URI to the newly created resource when you invoke a POST method to store some new object.
  */
