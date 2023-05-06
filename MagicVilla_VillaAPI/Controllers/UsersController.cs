@@ -21,6 +21,8 @@ namespace MagicVilla_VillaAPI.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
         {
             var loginResponse = await _userRepo.Login(model);
@@ -35,7 +37,7 @@ namespace MagicVilla_VillaAPI.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             _response.Result = loginResponse;
-            return BadRequest(_response);
+            return Ok(_response);
         }
 
         [HttpPost("register")]
