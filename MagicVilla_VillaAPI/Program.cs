@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 });
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File("log/villagLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
 
