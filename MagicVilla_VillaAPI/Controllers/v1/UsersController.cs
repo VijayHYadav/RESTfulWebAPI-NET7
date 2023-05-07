@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace MagicVilla_VillaAPI.Controllers
+namespace MagicVilla_VillaAPI.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/UsersAuth")]
     [ApiController]
@@ -18,7 +18,7 @@ namespace MagicVilla_VillaAPI.Controllers
         public UsersController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            this._response = new();
+            _response = new();
         }
 
         [HttpPost("login")]
@@ -27,10 +27,10 @@ namespace MagicVilla_VillaAPI.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
         {
             var loginResponse = await _userRepo.Login(model);
-            if(loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
+            if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
-                _response.IsSuccess= false;
+                _response.IsSuccess = false;
                 _response.ErrorMessage.Add("Username or password is incorrect");
                 return BadRequest(_response);
             }
