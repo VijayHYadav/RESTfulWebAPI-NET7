@@ -91,6 +91,23 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1.0",
+        Title = "Magic Villa",
+        Description = "API to manage Villa",
+        TermsOfService = new Uri("https://vijay-dev.netlify.app"),
+        Contact = new OpenApiContact
+        {
+            Name = "Vijay-Port",
+            Url = new Uri("https://vijay-dev.netlify.app")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://vijay-dev.netlify.app")
+        }
+    });
 });
 
 builder.Services.AddSingleton<ILogging, Logging>(); // that's all that we have to do to register service in the container.
@@ -101,7 +118,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Magic_VillaV1");
+    });
 }
 
 app.UseHttpsRedirection();
