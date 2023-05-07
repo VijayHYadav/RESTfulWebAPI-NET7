@@ -58,7 +58,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
 
                 if (!string.IsNullOrEmpty(search))
                 {
-                    villaList = villaList.Where(u.Name.ToLower().Contains(search));
+                    villaList = villaList.Where(u => u.Name.ToLower().Contains(search));
                 }
 
                 _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
