@@ -93,12 +93,14 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 {
                     _logger.Log("Get Villa Error with Id" + id, "Error");
                     _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
                 var villa = await _dbVilla.GetAsync(u => u.Id == id);
                 if (villa == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
+                    _response.IsSuccess = false;
                     return NotFound(_response);
                 }
 
