@@ -35,7 +35,8 @@ namespace MagicVilla_VillaAPI.Controllers.v1
 
         [HttpGet]
         //[ResponseCache(Duration = 30)]
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore =true)]
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore =true)]
+        [ResponseCache(CacheProfileName = "Default30")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
