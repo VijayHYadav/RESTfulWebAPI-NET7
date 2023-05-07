@@ -14,8 +14,9 @@ using System.Net;
 namespace MagicVilla_VillaAPI.Controllers
 {
     //[Route("api/[controller]")] If we write 'controller', that will automatically apply VillaAPI to the route right here.
-    [Route("api/villaAPI")]
+    [Route("api/v{version:apiVersion}/villaAPI")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class VillaAPIController : ControllerBase
     {
         protected APIResponse _response;
